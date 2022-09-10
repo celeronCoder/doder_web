@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  theme: {},
+  theme: {
+    extend: {
+      fontFamily: {
+        primary: "'Poppins', sans-serif",
+        heading: "'Space Grotesk', sans-serif",
+      },
+    },
+  },
   plugins: [require("daisyui")],
 };

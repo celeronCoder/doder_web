@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "cockroachdb"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.text annotations in model Account below
     // Further reading: 
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
@@ -53,6 +53,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    todos         Todo[]
 }
 
 model VerificationToken {
@@ -61,4 +62,21 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Todo {
+    id          String   @id @default(cuid())
+    title       String
+    description String   @default("")
+    priority    Priority @default(None)
+    dueDate     DateTime
+    user        User     @relation(references: [id], fields: [userId])
+    userId      String
+}
+
+enum Priority {
+    P1
+    P2
+    P3
+    None
 }

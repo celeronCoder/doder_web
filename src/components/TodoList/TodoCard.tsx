@@ -2,7 +2,7 @@ import { Todo } from "../../types/models";
 
 export const TodoCard: React.FC<{ todo: Todo }> = ({ todo }) => {
   return (
-    <div className="rounded-lg flex items-start justify-start shadow-md gap-3 w-full border-2 border-base-content bg-base-100 p-5">
+    <div className="min-w-max rounded-lg flex items-start justify-start shadow-md gap-3 w-full border-2 border-base-content bg-base-100 p-5">
       <input
         type="checkbox"
         className="checkbox checkbox-primary mt-[0.35rem]"

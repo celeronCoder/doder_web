@@ -2,7 +2,7 @@ import { FlagIcon } from "@heroicons/react/outline";
 
 export const AddTodo: React.FC = () => {
   return (
-    <div className="input-container flex items-center justify-center gap-5 p-10 w-2/4">
+    <div className="input-container flex items-center justify-center gap-5 p-10 w-2/4 min-w-max">
       {/* input box */}
       <div className="max-w-2xl w-full flex flex-col gap-2">
         <div className="border-2 border-primary px-3 py-4 rounded-lg w-full">

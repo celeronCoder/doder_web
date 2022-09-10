@@ -1,3 +1,5 @@
+import { FlagIcon } from "@heroicons/react/outline";
+
 export const AddTodo: React.FC = () => {
   return (
     <div className="input-container flex items-center justify-center gap-5 p-10 w-2/4">
@@ -37,26 +39,25 @@ export const AddTodo: React.FC = () => {
               <p>Due Date</p>
             </div>
             {/* priority */}
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-5 text-slate-400 rotate-90"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 6h.008v.008H6V6z"
-                />
-              </svg>
+            <div className="btn-group">
+              <input
+                type="radio"
+                name="options"
+                data-title="p1"
+                className="btn btn-xs"
+              />
+              <input
+                type="radio"
+                name="options"
+                data-title="p2"
+                className="btn btn-xs"
+              />
+              <input
+                type="radio"
+                name="options"
+                data-title="p3"
+                className="btn btn-xs"
+              />
             </div>
           </div>
         </div>

@@ -14,6 +14,11 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Poppins&family=Space+Grotesk&display=swap"
           rel="stylesheet"
         ></link>
+        <link
+          rel="shortcut icon"
+          href="favicon-light.svg"
+          type="image/x-icon"
+        />
       </Head>
       <body>
         <Main />

@@ -1,5 +1,3 @@
-import { FlagIcon } from "@heroicons/react/outline";
-
 export const AddTodo: React.FC = () => {
   return (
     <div className="input-container flex items-center justify-center gap-5 p-10 w-2/4 min-w-max">

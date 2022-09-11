@@ -69,7 +69,7 @@ model Todo {
     title       String
     description String   @default("")
     priority    Priority @default(None)
-    dueDate     DateTime
+    dueDate     DateTime @default(now())
     user        User     @relation(references: [id], fields: [userId])
     userId      String
 }

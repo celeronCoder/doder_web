@@ -1,8 +1,17 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
+import { unstable_getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { AddTodo, TodoList, Wrapper } from "../components";
-import { Todo } from "../types/models";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-const todos: Todo[] = [
+const todos: {
+  id: string;
+  title: string;
+  description?: string;
+  dueDate?: Date;
+}[] = [
   {
     id: "asdasdadsad",
     title: "Buy milk",
@@ -43,3 +52,25 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await unstable_getServerSession(
+    ctx.req,
+    ctx.res,
+    authOptions
+  );
+  // redirect to login if session is null i.e user isn't logged in
+  const redirect =
+    session === null
+      ? {
+          destination: "/login",
+          permanent: false,
+        }
+      : undefined;
+  return {
+    props: {
+      session,
+    },
+    redirect,
+  };
+};

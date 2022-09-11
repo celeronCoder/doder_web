@@ -1,4 +1,9 @@
+import { signOut, useSession } from "next-auth/react";
+
 export const Header: React.FC = () => {
+  const session = useSession();
+
+  if (!session) return null;
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -15,7 +20,7 @@ export const Header: React.FC = () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
+              <img src={session.data?.user?.image!} />
             </div>
           </label>
           <ul
@@ -31,7 +36,7 @@ export const Header: React.FC = () => {
             <li>
               <a>Settings</a>
             </li>
-            <li>
+            <li onClick={() => signOut()}>
               <a>Logout</a>
             </li>
           </ul>

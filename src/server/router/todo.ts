@@ -41,4 +41,17 @@ export const todoRouter = createProtectedRouter()
         },
       });
     },
+  })
+  .mutation("toggleComplete", {
+    input: z.object({
+      id: z.string().cuid(),
+      completed: z.boolean(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.todo.update({
+        where: { id: input.id },
+        // currently there's no method to togglee boolean field, so we'll do that in the client
+        data: { completed: input.completed },
+      });
+    },
   });

@@ -39,7 +39,13 @@ export const TodoCard: React.FC<{ todo: Todo }> = ({ todo }) => {
         onChange={complete}
       />
       <div className="w-full flex flex-col items-start justify-start gap-1">
-        <p className="text-2xl text-primary-focus">{todo.title}</p>
+        <p
+          className={`text-2xl text-primary-focus duration-500 ${
+            todo.completed && "line-through text-neutral-content"
+          }`}
+        >
+          {todo.title}
+        </p>
         <div className="w-full flex items-center justify-between">
           <p className="justify-start text-sm text-neutral-content">
             {todo.description}

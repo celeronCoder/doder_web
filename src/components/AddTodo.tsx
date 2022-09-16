@@ -14,7 +14,12 @@ export const AddTodo: React.FC = () => {
     setPriority("None");
   };
 
-  const createMutation = trpc.useMutation("todo.create");
+  const trpcCtx = trpc.useContext();
+  const createMutation = trpc.useMutation(["todo.create"], {
+    onSuccess() {
+      trpcCtx.invalidateQueries(["todo.getAll"]);
+    },
+  });
 
   const create = async () => {
     await createMutation.mutateAsync({

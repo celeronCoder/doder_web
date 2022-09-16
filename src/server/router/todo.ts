@@ -7,6 +7,9 @@ export const todoRouter = createProtectedRouter()
     async resolve({ ctx }) {
       return await ctx.prisma.todo.findMany({
         where: { userId: ctx.session.user.id },
+        orderBy: {
+          completed: "asc",
+        },
       });
     },
   })

@@ -1,5 +1,5 @@
 import { Todo } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { trpc } from "../../utils/trpc";
 
 export const TodoCard: React.FC<{ todo: Todo }> = ({ todo }) => {
@@ -21,15 +21,6 @@ export const TodoCard: React.FC<{ todo: Todo }> = ({ todo }) => {
     });
   };
 
-  useEffect(() => {
-    console.log("todo", todo);
-    console.log("completed on startup", completed);
-  }, []);
-
-  useEffect(() => {
-    console.log("completed", completed);
-  }, [completed]);
-
   return (
     <div className="min-w-max rounded-lg flex items-start justify-start shadow-md gap-3 w-full border-2 border-base-content bg-base-100 p-5">
       <input
@@ -40,14 +31,18 @@ export const TodoCard: React.FC<{ todo: Todo }> = ({ todo }) => {
       />
       <div className="w-full flex flex-col items-start justify-start gap-1">
         <p
-          className={`text-2xl text-primary-focus duration-500 ${
-            todo.completed && "line-through text-neutral-content"
-          }`}
+          className={`text-2xl ${
+            todo.completed ? "text-slate-500" : "text-primary-focus"
+          } duration-100 ${todo.completed && "line-through"}`}
         >
           {todo.title}
         </p>
         <div className="w-full flex items-center justify-between">
-          <p className="justify-start text-sm text-neutral-content">
+          <p
+            className={`justify-start text-sm ${
+              todo.completed ? "text-slate-600" : "text-neutral-content"
+            }`}
+          >
             {todo.description}
           </p>
           {todo.dueDate && (

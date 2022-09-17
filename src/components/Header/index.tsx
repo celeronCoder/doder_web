@@ -17,8 +17,9 @@ import {
   IconSun,
   IconUser,
 } from "@tabler/icons";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { Logo } from "../shared";
 import { useStyles } from "./styles";
 
 export const Header: React.FC = () => {
@@ -36,9 +37,7 @@ export const Header: React.FC = () => {
     <div className={classes.header}>
       <Container className={classes.mainSection}>
         <Group position="apart">
-          <Title order={3} style={{ fontFamily: "Space Grotesk" }}>
-            Doder
-          </Title>
+          <Logo />
 
           <Group>
             {/* color scheme toggle */}
@@ -127,6 +126,7 @@ export const Header: React.FC = () => {
                       stroke={1.5}
                     />
                   }
+                  onClick={() => signOut()}
                 >
                   Log Out
                 </Menu.Item>

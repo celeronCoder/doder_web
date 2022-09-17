@@ -42,6 +42,7 @@ const App: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
             headings: {
               fontFamily: '"Space Grotesk", monospace',
             },
+            primaryColor: "indigo",
           }}
         >
           <Component {...pageProps} />

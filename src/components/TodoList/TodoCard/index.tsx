@@ -76,6 +76,7 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
     <Card
       withBorder
       shadow="lg"
+      radius="lg"
       style={{ width: "50%", minWidth: "380px" }}
       component={motion.div}
       initial={{ translateY: 100, opacity: 0, scale: 0.5 }}

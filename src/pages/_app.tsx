@@ -45,7 +45,6 @@ const App: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
               fontFamily: '"Space Grotesk", monospace',
             },
             primaryColor: "indigo",
-            defaultRadius: "lg",
           }}
         >
           <ModalsProvider>

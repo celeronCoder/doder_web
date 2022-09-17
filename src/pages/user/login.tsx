@@ -13,7 +13,6 @@ export default function Login() {
         p="xl"
         withBorder
         shadow="xl"
-        radius="lg"
         style={{
           display: "flex",
           alignItems: "center",

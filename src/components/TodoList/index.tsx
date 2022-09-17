@@ -1,6 +1,6 @@
 import { Todo } from "@prisma/client";
 import { TodoCard } from "./TodoCard";
-import { Center, Container, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 
 export const TodoList: React.FC<{ todos?: Todo[] }> = ({ todos }) => {
   if (!todos) return null;

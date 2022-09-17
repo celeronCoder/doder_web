@@ -1,18 +1,22 @@
 import {
   ActionIcon,
+  Button,
   Card,
   Checkbox,
   Collapse,
+  Container,
   Group,
   Text,
   Title,
 } from "@mantine/core";
 import { Todo } from "@prisma/client";
-import { IconEdit, IconTrash } from "@tabler/icons";
+import { IconArrowBackUp, IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 import { trpc } from "../../../utils/trpc";
 import { useStyles } from "./styles";
 import { motion } from "framer-motion";
+import { openConfirmModal } from "@mantine/modals";
+import { showNotification } from "@mantine/notifications";
 
 export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
   todo,
@@ -21,6 +25,12 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
   const [completed, setCompleted] = useState(todo.completed);
   const trpcCtx = trpc.useContext();
   const completeMutation = trpc.useMutation(["todo.toggleComplete"], {
+    onSuccess() {
+      trpcCtx.invalidateQueries("todo.getAll");
+    },
+  });
+
+  const deleteMutation = trpc.useMutation(["todo.delete"], {
     onSuccess() {
       trpcCtx.invalidateQueries("todo.getAll");
     },
@@ -38,11 +48,34 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
     });
   };
 
+  const openDeleteConfirmationModal = () =>
+    openConfirmModal({
+      title: "Please confirm your action",
+      children: (
+        <Text size="sm">
+          This action is irreversible. Are your sure you want to delete?
+        </Text>
+      ),
+      labels: { confirm: "Delete", cancel: "Keep it!" },
+      confirmProps: { color: "red" },
+      onConfirm: async () => {
+        await deleteMutation.mutateAsync({ id: todo.id });
+        showNotification({
+          title: "To-Do item deleted.",
+          message:
+            "To-Do item was deleted successfully, this action is irreversible.",
+          color: "yellow",
+          autoClose: 5000,
+          icon: <IconTrash />,
+          radius: "lg",
+        });
+      },
+    });
+
   return (
     <Card
       withBorder
       shadow="lg"
-      radius="lg"
       style={{ width: "50%", minWidth: "380px" }}
       component={motion.div}
       initial={{ translateY: 100, opacity: 0, scale: 0.5 }}
@@ -51,7 +84,11 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
     >
       <Card.Section p="md" pb={0} className={classes.main}>
         <Group>
-          <Checkbox size="md" />
+          <Checkbox
+            size="md"
+            checked={todo.completed}
+            onChange={() => complete()}
+          />
           <Title
             className={classes.title}
             style={{ userSelect: "none", cursor: "pointer" }}
@@ -62,7 +99,7 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
           </Title>
         </Group>
         <Group>
-          <ActionIcon variant="subtle">
+          <ActionIcon variant="subtle" onClick={openDeleteConfirmationModal}>
             <IconTrash size={18} />
           </ActionIcon>
           <ActionIcon variant="subtle">

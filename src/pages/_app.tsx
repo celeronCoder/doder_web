@@ -13,6 +13,8 @@ import {
   MantineProvider,
 } from "@mantine/core";
 import { useColorScheme, useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { ModalsProvider } from "@mantine/modals";
+import { NotificationsProvider } from "@mantine/notifications";
 
 const App: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   const preferredColorScheme = useColorScheme();
@@ -43,9 +45,14 @@ const App: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
               fontFamily: '"Space Grotesk", monospace',
             },
             primaryColor: "indigo",
+            defaultRadius: "lg",
           }}
         >
-          <Component {...pageProps} />
+          <ModalsProvider>
+            <NotificationsProvider>
+              <Component {...pageProps} />
+            </NotificationsProvider>
+          </ModalsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </SessionProvider>

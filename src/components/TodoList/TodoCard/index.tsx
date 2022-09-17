@@ -12,8 +12,12 @@ import { IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 import { trpc } from "../../../utils/trpc";
 import { useStyles } from "./styles";
+import { motion } from "framer-motion";
 
-export const TodoCard: React.FC<{ todo: Todo }> = ({ todo }) => {
+export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
+  todo,
+  idx,
+}) => {
   const [completed, setCompleted] = useState(todo.completed);
   const trpcCtx = trpc.useContext();
   const completeMutation = trpc.useMutation(["todo.toggleComplete"], {
@@ -40,6 +44,10 @@ export const TodoCard: React.FC<{ todo: Todo }> = ({ todo }) => {
       shadow="lg"
       radius="lg"
       style={{ width: "50%", minWidth: "380px" }}
+      component={motion.div}
+      initial={{ translateY: 100, opacity: 0, scale: 0.5 }}
+      animate={{ translateY: 0, opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7, delay: idx * 0.1 }}
     >
       <Card.Section p="md" pb={0} className={classes.main}>
         <Group>

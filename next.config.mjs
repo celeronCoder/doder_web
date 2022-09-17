@@ -16,7 +16,6 @@ export default defineNextConfig({
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    // !ERROR: this isn't working and giving us cors error
     domains: ["lh3.googleusercontent.com"],
   },
 });

@@ -57,4 +57,12 @@ export const todoRouter = createProtectedRouter()
         data: { completed: input.completed },
       });
     },
+  })
+  .mutation("delete", {
+    input: z.object({
+      id: z.string().cuid(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.todo.delete({ where: { id: input.id } });
+    },
   });

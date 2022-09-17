@@ -4,7 +4,6 @@ specifiers:
   '@babel/core': ^7.0.0
   '@emotion/react': ^11.10.4
   '@emotion/server': ^11.10.0
-  '@formkit/auto-animate': 1.0.0-beta.3
   '@mantine/core': ^5.3.2
   '@mantine/dates': ^5.3.2
   '@mantine/hooks': ^5.3.2
@@ -40,7 +39,6 @@ dependencies:
   '@babel/core': 7.19.1
   '@emotion/react': 11.10.4_q5xdqnrmy3gelxefgckz3cjhaa
   '@emotion/server': 11.10.0
-  '@formkit/auto-animate': 1.0.0-beta.3
   '@mantine/core': 5.3.2_jnynd3kvbcbxnzsmzawdb7gij4
   '@mantine/dates': 5.3.2_d5oa5tt4uf5tzavj2qqqkbghui
   '@mantine/hooks': 5.3.2_react@18.2.0
@@ -471,10 +469,6 @@ packages:
       use-isomorphic-layout-effect: 1.1.2_luyos4mouogwq6z3wafb3re4ce
     transitivePeerDependencies:
       - '@types/react'
-    dev: false
-
-  /@formkit/auto-animate/1.0.0-beta.3:
-    resolution: {integrity: sha512-glsi+ytwQpxT/Ctr9GtcIfVr4dO6mJ04mQbNU8MFSdCdqMopHtyfU5Fib0+9lNFIeR0luY4/0NW95/2R5pKsag==}
     dev: false
 
   /@humanwhocodes/config-array/0.10.4:

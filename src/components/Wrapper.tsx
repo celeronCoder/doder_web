@@ -7,7 +7,7 @@ export const Wrapper: React.FC<{ children: React.ReactNode }> = ({
   return (
     <div className="select-none min-h-screen felx items-center justify-center w-full">
       <Header />
-      {children}
+      {/* {children} */}
     </div>
   );
 };

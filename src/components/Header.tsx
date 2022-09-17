@@ -1,7 +1,13 @@
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import { useEffect } from "react";
 
 export const Header: React.FC = () => {
   const session = useSession();
+
+  useEffect(() => {
+    console.log(session.data?.user?.image);
+  }, []);
 
   if (!session) return null;
   return (
@@ -19,8 +25,15 @@ export const Header: React.FC = () => {
         </div>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src={session.data?.user?.image!} />
+            <div className="avatar">
+              <div className="w-10 rounded-full">
+                <Image
+                  src={session.data?.user?.image as string}
+                  alt={session.data?.user?.name!}
+                  layout="fill"
+                  className="rounded-full w-10"
+                />
+              </div>
             </div>
           </label>
           <ul

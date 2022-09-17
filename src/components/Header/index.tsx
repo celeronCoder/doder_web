@@ -1,12 +1,9 @@
 import {
   ActionIcon,
-  Avatar,
   Container,
-  createStyles,
   Group,
   Menu,
   Text,
-  Title,
   UnstyledButton,
   useMantineColorScheme,
 } from "@mantine/core";
@@ -18,6 +15,7 @@ import {
   IconUser,
 } from "@tabler/icons";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Logo } from "../shared";
 import { useStyles } from "./styles";
@@ -76,11 +74,12 @@ export const Header: React.FC = () => {
                   })}
                 >
                   <Group spacing={7}>
-                    <Avatar
-                      src={session.data?.user?.image}
+                    <Image
+                      src={session.data?.user?.image as string}
                       alt={session.data?.user?.name as string}
-                      radius="xl"
-                      size={20}
+                      width={25}
+                      height={25}
+                      style={{ borderRadius: "100%" }}
                     />
                     <Text
                       weight={500}

@@ -36,4 +36,4 @@ jobs:
       - name: Install depndencies
         run: pnpm install
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: pnpm build

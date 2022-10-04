@@ -6,8 +6,8 @@ on:
     branches: ["main"]
 
 jobs:
-  # Build job
-  build:
+  # PNPM setup job
+  cache-and-install:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,5 +35,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install depndencies
         run: pnpm install
+  build:
+    runs-on: ubuntu-latest
+    needs: [cache-and-install]
+    steps:
       - name: Build with Next.js
         run: pnpm build

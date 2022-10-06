@@ -21,7 +21,6 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
   todo,
   idx,
 }) => {
-  const theme = useMantineTheme();
   const [completed, setCompleted] = useState(todo.completed);
   const trpcCtx = trpc.useContext();
   const completeMutation = trpc.useMutation(["todo.toggleComplete"], {
@@ -35,7 +34,7 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
       trpcCtx.invalidateQueries("todo.getAll");
     },
   });
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   const [showDescription, setShowDescription] = useState(false);
 
   // setState functions don't take effect immediately and are asynchronous, they usually dispatch a trigger or action.
@@ -92,13 +91,10 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
             onChange={() => complete()}
           />
           <Title
-            className={classes.title}
-            style={{
-              userSelect: "none",
-              cursor: "pointer",
-              textDecoration: todo.completed ? "line-through" : undefined,
-              color: todo.completed ? theme.colors.gray[5] : undefined,
-            }}
+            className={cx(
+              classes.title,
+              todo.completed && classes.completedTodo
+            )}
             order={4}
             onClick={() => setShowDescription(!showDescription)}
           >

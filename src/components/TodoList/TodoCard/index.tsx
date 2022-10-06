@@ -6,6 +6,7 @@ import {
   Group,
   Text,
   Title,
+  useMantineTheme,
 } from "@mantine/core";
 import { Todo } from "@prisma/client";
 import { IconEdit, IconTrash } from "@tabler/icons";
@@ -20,6 +21,7 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
   todo,
   idx,
 }) => {
+  const theme = useMantineTheme();
   const [completed, setCompleted] = useState(todo.completed);
   const trpcCtx = trpc.useContext();
   const completeMutation = trpc.useMutation(["todo.toggleComplete"], {
@@ -86,11 +88,17 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
           <Checkbox
             size="md"
             checked={todo.completed}
+            color={todo.completed ? "gray" : "indigo"}
             onChange={() => complete()}
           />
           <Title
             className={classes.title}
-            style={{ userSelect: "none", cursor: "pointer" }}
+            style={{
+              userSelect: "none",
+              cursor: "pointer",
+              textDecoration: todo.completed ? "line-through" : undefined,
+              color: todo.completed ? theme.colors.gray[5] : undefined,
+            }}
             order={4}
             onClick={() => setShowDescription(!showDescription)}
           >

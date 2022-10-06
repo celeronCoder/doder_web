@@ -1,16 +1,14 @@
 import {
   ActionIcon,
-  Button,
   Card,
   Checkbox,
   Collapse,
-  Container,
   Group,
   Text,
   Title,
 } from "@mantine/core";
 import { Todo } from "@prisma/client";
-import { IconArrowBackUp, IconEdit, IconTrash } from "@tabler/icons";
+import { IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 import { trpc } from "../../../utils/trpc";
 import { useStyles } from "./styles";

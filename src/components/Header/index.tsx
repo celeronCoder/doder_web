@@ -16,7 +16,7 @@ import {
 } from "@tabler/icons";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Logo } from "../shared";
 import { useStyles } from "./styles";
 import { motion } from "framer-motion";

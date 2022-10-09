@@ -14,10 +14,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id String @id @default(cuid())
-}
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -66,6 +62,8 @@ model VerificationToken {
 
 model Todo {
     id          String   @id @default(cuid())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @default(now()) @updatedAt
     title       String
     description String   @default("")
     priority    Priority @default(None)

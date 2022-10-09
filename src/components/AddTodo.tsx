@@ -44,7 +44,7 @@ export const AddTodo: React.FC = () => {
         <div className="border-2 border-primary px-3 py-4 rounded-lg w-full">
           {/* title input */}
           <input
-            value={title!}
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
             className="block w-full font-bold placeholder:textslate-400 text-slate-300 focus-within:outline-none mb-1 bg-transparent"

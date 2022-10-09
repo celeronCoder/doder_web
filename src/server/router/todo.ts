@@ -2,6 +2,13 @@ import { z } from "zod";
 import { createProtectedRouter } from "./context";
 import { Priority } from "@prisma/client";
 
+const todoInput = z.object({
+  title: z.string(),
+  description: z.string(),
+  dueDate: z.date().optional(),
+  priority: z.nativeEnum(Priority),
+});
+
 export const todoRouter = createProtectedRouter()
   .query("getAll", {
     async resolve({ ctx }) {
@@ -24,12 +31,7 @@ export const todoRouter = createProtectedRouter()
     },
   })
   .mutation("create", {
-    input: z.object({
-      title: z.string(),
-      description: z.string(),
-      dueDate: z.date().optional(),
-      priority: z.nativeEnum(Priority),
-    }),
+    input: todoInput,
     async resolve({ ctx, input }) {
       return await ctx.prisma.todo.create({
         data: {
@@ -55,6 +57,19 @@ export const todoRouter = createProtectedRouter()
         where: { id: input.id },
         // currently there's no method to togglee boolean field, so we'll do that in the client
         data: { completed: input.completed },
+      });
+    },
+  })
+  .mutation("update", {
+    input: todoInput.merge(
+      z.object({
+        id: z.string().cuid(),
+      })
+    ),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.todo.update({
+        where: { id: input.id },
+        data: input,
       });
     },
   })

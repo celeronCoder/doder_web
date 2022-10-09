@@ -62,6 +62,8 @@ model VerificationToken {
 
 model Todo {
     id          String   @id @default(cuid())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @default(now()) @updatedAt
     title       String
     description String   @default("")
     priority    Priority @default(None)

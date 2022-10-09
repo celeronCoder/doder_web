@@ -6,7 +6,6 @@ import {
   Group,
   Text,
   Title,
-  useMantineTheme,
 } from "@mantine/core";
 import { Todo } from "@prisma/client";
 import { IconEdit, IconTrash } from "@tabler/icons";
@@ -14,8 +13,9 @@ import { useState } from "react";
 import { trpc } from "../../../utils/trpc";
 import { useStyles } from "./styles";
 import { motion } from "framer-motion";
-import { openConfirmModal } from "@mantine/modals";
+import { openConfirmModal, openModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
+import { EditTodoModal } from "../../EditTodoModal";
 
 export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
   todo,
@@ -71,6 +71,13 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
       },
     });
 
+  const openEditModal = () => {
+    openModal({
+      title: "Edit todo",
+      children: <EditTodoModal todo={todo} />,
+    });
+  };
+
   return (
     <Card
       withBorder
@@ -105,7 +112,7 @@ export const TodoCard: React.FC<{ todo: Todo; idx: number }> = ({
           <ActionIcon variant="subtle" onClick={openDeleteConfirmationModal}>
             <IconTrash size={18} />
           </ActionIcon>
-          <ActionIcon variant="subtle">
+          <ActionIcon onClick={openEditModal} variant="subtle">
             <IconEdit size={18} />
           </ActionIcon>
         </Group>

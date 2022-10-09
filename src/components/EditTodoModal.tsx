@@ -53,7 +53,6 @@ export const EditTodoModal: React.FC<{ todo: Todo }> = ({ todo }) => {
         color: "blue",
         message:
           "Todo Item was updated successfully, changes will be reflected shortly.",
-        autoClose: 100,
       });
     closeAllModals();
   };

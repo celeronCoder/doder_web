@@ -147,3 +147,6 @@ const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
     </div>
   )
 );
+
+// for display-name eslint rules
+SelectItem.displayName = "SelectItem";
